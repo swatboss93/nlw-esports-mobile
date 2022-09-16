@@ -30,7 +30,7 @@ export function Game() {
     fetch(`http://192.168.1.7:3333/games/${game.id}/ads`)
       .then(response => response.json())
       .then(data => {
-        setDuos(data)
+        setDuos(data);
       })
   }, [])
 
@@ -54,10 +54,10 @@ export function Game() {
 
         <Heading title={game.title} subtitle='Conecte-se e começe a jogar!' />
 
-        <FlatList
+        {duos && <FlatList
           data={duos}
           keyExtractor={item => item.id}
-          renderItem={(item) => (
+          renderItem={({item}) => (
             <DuoCard data={item} onConnect={() => {}} />
           )}
           horizontal
@@ -69,7 +69,7 @@ export function Game() {
               Ainda não há anúncios :(
             </Text>
           )}
-        />
+        />}
       </SafeAreaView>
     </Background>
   );
